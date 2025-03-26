@@ -18,6 +18,8 @@
 # include <string.h>
 # include <stdlib.h>
 
+int				ft_putchar(int c);
+int				ft_putstr(char *s);
 size_t			ft_strlen(const char *str);
 int				ft_atoi(const char *str);
 int				ft_toupper(int c);
@@ -52,6 +54,7 @@ void			ft_striteri(char *s, void (*f)(unsigned int, char*));
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char			**ft_split(char const *s, char c);
 char			*ft_itoa(int n);
+void			ft_free_all(char **matrix);
 
 typedef struct s_list
 {

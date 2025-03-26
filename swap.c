@@ -1,42 +1,47 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   swap.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncheniou <ncheniou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/25 13:20:00 by ncheniou          #+#    #+#             */
+/*   Updated: 2025/03/25 13:20:05 by ncheniou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./push_swap.h"
 
-void	ft_swapnode(t_stack **top)
+void	ft_swap_node(t_stack **stack)
 {
-	t_stack *first;
-	t_stack *second;
+	t_stack	*aux;
+	int		num;
 
-	if (!*top || !(*top)->next)
-		return ;
-	first = *top;
-	second = (*top)->next;
-	if (first->prev)
-		first->prev->next = second;
-	if (second->next)
-		second->next->prev = first;
-	first->next = second->next;
-	second->prev = first->prev;
-	first->prev = second;
-	second->next = first;
-	*top = second;
+	aux = *stack;
+	if (*stack)
+	{
+		num = aux->next->num;
+		aux->next->num = aux->num;
+		aux->num = num;
+	}
 }
 
-void	ft_swap(t_stack **a,t_stack **b, int move)
+void	ft_swap(t_stack **stack_a, t_stack **stack_b, int move)
 {
 	if (move == MOVESA)
 	{
-		ft_swapnode(a);
-		write(1, "sa\n", 3);
+		ft_swap_node(stack_a);
+		ft_putstr(SA);
 	}
-
 	else if (move == MOVESB)
 	{
-		ft_swapnode(b);
-		write(1, "sb\n", 3);
+		ft_swap_node(stack_b);
+		ft_putstr(SB);
 	}
-	if (move == MOVESS)
+	else if (move == MOVESS)
 	{
-		ft_swapnode(a);
-		ft_swapnode(b);
-		write(1, "ss\n", 3);
+		ft_swap_node(stack_a);
+		ft_swap_node(stack_b);
+		ft_putstr(SS);
 	}
 }

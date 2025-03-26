@@ -1,76 +1,88 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncheniou <ncheniou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/25 13:20:59 by ncheniou          #+#    #+#             */
+/*   Updated: 2025/03/26 08:52:45 by ncheniou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include <stdlib.h>
-#include <stdbool.h>
-#include <limits.h>
-#include <stdio.h>
-#include "moves.h"
-#include "libft/libft.h"
+# include "libft/libft.h"
+# include "./defines.h"
+# include <limits.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-typedef struct push_swap_list
+typedef struct s_stack	t_stack;
+
+struct					s_stack
 {
-	long					dataarg;
-	int						index;
-	int						cost;
-	bool					median;
-	bool					lowercost;
-	struct push_swap_list 	*target;
-	struct push_swap_list 	*prev;
-	struct push_swap_list 	*next;
-}					t_stack;
+	int					id;
+	long				num;
+	int					cost;
+	bool				median;
+	bool				min_cost;
+	t_stack				*target;
+	t_stack				*prev;
+	t_stack				*next;
+};
 
-// Manage errors and checking of information passed to stacks
-void	ft_errors_free(t_stack **a);
-void	ft_duplicates(t_stack *s);
-void	ft_free_stacks(t_stack **stacks);
-int		ft_syntax(char *s);
-void	ft_free_all(char **matrix);
+/* MOVEMENTS */
+void					ft_push(t_stack **stack_a, t_stack **stack_b, int move);
+void					ft_push_node(t_stack **stack, t_stack **node);
+void					ft_swap(t_stack **stack_a, t_stack **stack_b, int move);
+void					ft_swap_node(t_stack **stack);
+void					ft_rotate(t_stack **stack_a, t_stack **stack_b,
+							int move);
+void					ft_rotate_node(t_stack **stack);
+void					ft_reverse_rotate(t_stack **stack_a, t_stack **stack_b,
+							int move);
+void					ft_reverse_rotate_node(t_stack **stack);
 
-//Order an list utils for stack
-int		ft_lstlen_ps(t_stack *stacks);
-void	ft_lstadd_back_ps(t_stack **lst, t_stack *new);
-t_stack	*ft_lstnew_ps(int index, long num);
-int		ft_lstsize_ps(t_stack *lst);
-t_stack	*ft_lstlast_ps(t_stack *lst);
-bool	ft_stackorder(t_stack *stacks);
-void	ft_stack_median(t_stack *stacks);
+/* STACK INITIALIZER */
+void					ft_stack_duplicate_arg(t_stack *stack);
+void					ft_stack_add_node(t_stack **stack, char **nums,
+							int *index);
+void					ft_stack_init(char *av[], t_stack **stack_a);
 
-//MOvements
-void	ft_rever_rotatenode(t_stack **stacks);
-void	ft_rever_rotate(t_stack **a,t_stack **b, int move);
-void	ft_pushnode(t_stack **dest, t_stack **src);
-void	ft_push(t_stack **a,t_stack **b, int move);
-void	ft_rotatenode(t_stack **stacks);
-void	ft_rotate(t_stack **a,t_stack **b, int move);
-void	ft_swapnode(t_stack **top);
-void	ft_swap(t_stack **a,t_stack **b, int move);
+/* FIND & PREP SORT */
+t_stack					*ft_stack_max(t_stack *stack);
+t_stack					*ft_stack_min(t_stack *stack);
+int						ft_stack_len(t_stack *stack);
+int						ft_stack_sorted(t_stack *stack);
+void					ft_stack_above_half(t_stack *stack);
 
-//Find numbers mas and min
-t_stack	*ft_findmin(t_stack *stacks);
-t_stack	*ft_findmax(t_stack *stacks);
-t_stack	*ft_lowercost(t_stack *stacks);
+/* SET STACKS*/
+t_stack					*ft_stack_set_min_cost(t_stack **stack_a,
+							t_stack **stack_b);
+void					ft_push_cost(t_stack *stack_a, t_stack *stack_b,
+							t_stack *stack_a_node, int *count);
+void					ft_stack_set_target_a(t_stack *main_stack, t_stack *b);
+t_stack					*ft_stack_set_target_b(t_stack *node, t_stack *stack_a);
+void					ft_top_node(t_stack **stack_a, t_stack **stack_b,
+							t_stack *min_cost);
 
-//Initialize stac a to b
-void	ft_set_a(t_stack *a, t_stack *b);
-t_stack	*ft_set_b(t_stack *a, t_stack *b);
-void	ft_pushcost(t_stack *a,t_stack *b,t_stack *node_a, int *counter);
-t_stack	*ft_cheapest(t_stack **a, t_stack **b);
+/* STACK ORDER AND TURK ALGORITHM */
+void					ft_sort_three(t_stack **stack);
+void					ft_sort_push_b(t_stack **stack_a, t_stack **stack_b);
+void					ft_sort_push_a(t_stack **stack_a, t_stack **stack_b);
+void					ft_sort_stack(t_stack **stack_a, t_stack **stack_b);
+void					ft_sort_end(t_stack **stack_a, t_stack **stack_b);
 
-//Split for argv and initialize stacks
-void	ft_join_node(t_stack **stacks, char **nums, int *index);
-void	ft_stack_in(char **argv, t_stack **a);
-char	**ft_split_ps(char const *s, char c);
-void	*ft_calloc(size_t nmemb, size_t size);
-void	ft_bzero(void *s, size_t n);
-void	*ft_memset(void *b, int c, size_t len);
-
-//Algorithm turk
-void	ft_sort_three(t_stack **a);
-void	ft_sort_pb(t_stack **a, t_stack **b);
-void	ft_sort_pa(t_stack **a, t_stack **b);
-void	ft_sort_stacks(t_stack **a, t_stack **b);
-void	ft_revise_end(t_stack **a, t_stack **b);
-void	ft_stack_top_head(t_stack **a, t_stack **b, t_stack *min_cost);
+/* UTILS PUSHSWAP */
+int						ft_syntax(char *s);
+void					ft_free_list(t_stack **stack);
+t_stack					*ft_last_node(t_stack *lst);
+t_stack					*ft_new_node(int id, long num);
+void					ft_add_node_back(t_stack **stack, t_stack *new);
+long					ft_atol_ps(char *str);
 
 #endif

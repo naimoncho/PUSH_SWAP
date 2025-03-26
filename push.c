@@ -1,38 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncheniou <ncheniou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/25 13:20:52 by ncheniou          #+#    #+#             */
+/*   Updated: 2025/03/25 13:20:53 by ncheniou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./push_swap.h"
 
-void	ft_pushnode(t_stack **dest, t_stack **src)
+void	ft_push_node(t_stack **stack, t_stack **node)
 {
-	t_stack *push;
+	t_stack	*aux;
 
-	if (!*src)
+	if (!stack || !(*node))
 		return ;
-	push = *src;
-	*src = (*src)->next;
-	if (!*dest)
+	aux = *node;
+	*node = (*node)->next;
+	if (!(*stack))
 	{
-		*dest = push;
-		(*dest)->next = NULL;
+		*stack = aux;
+		(*stack)->next = NULL;
 	}
 	else
 	{
-		push->next = *dest;
-		push->next->prev = push;
-		if (*src)
-			(*src)->prev = NULL;
-		*dest = push;
+		aux->next = *stack;
+		aux->prev = NULL;
+		if (*node)
+			(*node)->prev = NULL;
+		(*stack)->prev = aux;
+		*stack = aux;
 	}
 }
 
-void	ft_push(t_stack **a,t_stack **b, int move)
+void	ft_push(t_stack **stack_a, t_stack **stack_b, int move)
 {
 	if (move == MOVEPA)
 	{
-		ft_pushnode(a, b);
-		write(1, "pa\n", 3);
+		ft_push_node(stack_a, stack_b);
+		ft_putstr(PA);
 	}
-	if (move == MOVEPB)
+	else if (move == MOVEPB)
 	{
-		ft_pushnode(a, b);
-		write(1, "pb\n", 3);
+		ft_push_node(stack_b, stack_a);
+		ft_putstr(PB);
 	}
 }

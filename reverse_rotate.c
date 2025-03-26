@@ -1,52 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncheniou <ncheniou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 13:20:43 by ncheniou          #+#    #+#             */
-/*   Updated: 2025/03/25 13:20:44 by ncheniou         ###   ########.fr       */
+/*   Created: 2025/03/25 13:20:47 by ncheniou          #+#    #+#             */
+/*   Updated: 2025/03/25 13:20:48 by ncheniou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./push_swap.h"
 
-void	ft_rotate_node(t_stack **stack)
+void	ft_reverse_rotate_node(t_stack **stack)
 {
-	t_stack	*next;
 	t_stack	*last;
+	t_stack	*prev_last;
 
 	if (!(*stack) || !(*stack)->next)
 		return ;
-	next = (*stack)->next;
+	prev_last = ft_last_node(*stack)->prev;
 	last = ft_last_node(*stack);
 	if (*stack)
 	{
-		next->prev = NULL;
+		last->prev = NULL;
 		last->next = *stack;
-		(*stack)->next = NULL;
-		(*stack)->prev = last;
-		*stack = next;
+		last->next->prev = last;
+		prev_last->next = NULL;
+		*stack = last;
 	}
 }
 
-void	ft_rotate(t_stack **stack_a, t_stack **stack_b, int move)
+void	ft_reverse_rotate(t_stack **stack_a, t_stack **stack_b, int move)
 {
-	if (move == MOVERA)
+	if (move == MOVERRA)
 	{
-		ft_rotate_node(stack_a);
-		ft_putstr(RA);
+		ft_reverse_rotate_node(stack_a);
+		ft_putstr(RRA);
 	}
-	else if (move == MOVERB)
+	else if (move == MOVERRB)
 	{
-		ft_rotate_node(stack_b);
-		ft_putstr(RB);
+		ft_reverse_rotate_node(stack_b);
+		ft_putstr(RRB);
 	}
-	else if (move == MOVERR)
+	else if (move == MOVERRR)
 	{
-		ft_rotate_node(stack_a);
-		ft_rotate_node(stack_b);
-		ft_putstr(RR);
+		ft_reverse_rotate_node(stack_a);
+		ft_reverse_rotate_node(stack_b);
+		ft_putstr(RRR);
 	}
 }
