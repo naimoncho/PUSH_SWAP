@@ -20,6 +20,9 @@ Este proyecto pone a prueba habilidades como:
 
 ```bash
 make
+
+---
+
 ## 🚀 Uso
 
 ```bash
@@ -29,6 +32,8 @@ pb
 sa
 ra
 ...
+
+---
 
 ## 📁 Estructura
 
