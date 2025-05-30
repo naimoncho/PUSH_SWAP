@@ -39,7 +39,7 @@ ra
 
 - **main.c** – Punto de entrada del programa.  
 - **stack_init.c** – Funciones para validar y gestionar los argumentos de entrada.  
-- **rotate.c reverse_rotate.c push.c swap.c – Implementación de las operaciones permitidas (`sa`, `ra`, etc.).  
+- **rotate.c reverse_rotate.c push.c swap.c** – Implementación de las operaciones permitidas (`sa`, `ra`, etc.).  
 - **find_sort.c alg_stack.c cost_set.c** – Algoritmos que controlan la lógica de ordenación.  
 - **stack_utils.c** – Funciones auxiliares y de soporte.  
 
