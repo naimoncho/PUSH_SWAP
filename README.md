@@ -33,10 +33,10 @@ ra
 ## 📁 Estructura
 
 - **main.c** – Punto de entrada del programa.  
-- **parsing/** – Funciones para validar y gestionar los argumentos de entrada.  
-- **operations/** – Implementación de las operaciones permitidas (`sa`, `ra`, etc.).  
-- **sorting/** – Algoritmos que controlan la lógica de ordenación.  
-- **utils/** – Funciones auxiliares y de soporte.  
+- **stack_init.c** – Funciones para validar y gestionar los argumentos de entrada.  
+- **rotate.c reverse_rotate.c push.c swap.c – Implementación de las operaciones permitidas (`sa`, `ra`, etc.).  
+- **find_sort.c alg_stack.c cost_set.c** – Algoritmos que controlan la lógica de ordenación.  
+- **stack_utils.c** – Funciones auxiliares y de soporte.  
 
 ---
 
