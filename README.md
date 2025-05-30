@@ -18,7 +18,6 @@ Este proyecto pone a prueba habilidades como:
 
 ## ⚙️ Compilación
 
-```bash
 make
 
 ---
