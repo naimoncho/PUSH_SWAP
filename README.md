@@ -18,13 +18,14 @@ Este proyecto pone a prueba habilidades como:
 
 ## ⚙️ Compilación
 
+bash
 make
 
 ---
 
 ## 🚀 Uso
 
-```bash
+bash
 ./push_swap 4 67 3 87 23
 El programa devolverá por salida estándar la secuencia de instrucciones necesarias para ordenar la lista, por ejemplo:
 pb
